@@ -1,17 +1,15 @@
-import './css/style.css';
-
+import "css/style";
 
 class Cat {
-  say() {
+  public say() {
     console.log("meow ~ shit");
   }
 }
-var kitty = new Cat();
+const kitty = new Cat();
 
-kitty.say = function() {
+kitty.say = () => {
   console.log("woof !");
 
-  throw new Error('fuck you');
+  throw new Error("fuck you");
 };
-kitty.say(); // meow ~ 
-
+kitty.say(); // meow ~

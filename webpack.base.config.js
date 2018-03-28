@@ -30,17 +30,17 @@ module.exports = {
         test: /.(less|css)$/,
         exclude: /node_modules/,
         include: path.resolve(__dirname, "src"),
-        use: ExtractTextPlugin.extract({ 
-          fallback: 'style-loader',
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
           use: [
             {
-              loader:'css-loader',
+              loader: "css-loader",
               options: {
                 minimize: true
               }
-            }, 
-            'less-loader',
-          ],
+            },
+            "less-loader"
+          ]
         })
       },
       // js
@@ -48,7 +48,7 @@ module.exports = {
         test: /.js$/,
         exclude: /node_modules/,
         include: path.resolve(__dirname, "src"),
-        use: "babal-loader"
+        use: "babel-loader"
       },
       //ts
       {
@@ -60,7 +60,7 @@ module.exports = {
       },
       // png,jpg
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /.(png|jpg|gif)$/,
         exclude: /node_modules/,
         include: path.resolve(__dirname, "src"),
         use: [
@@ -75,7 +75,10 @@ module.exports = {
 
   //module
   resolve: {
-    extensions: [".js", "json", ".ts", "less", "css"],
+    alias: {
+      css: path.resolve(__dirname, "src/css")
+    },
+    extensions: [".js", ".json", ".ts", ".less", ".css"],
     modules: [
       path.resolve(__dirname, "node_modules"), // 指定当前目录下的 node_modules 优先查找
       "node_modules" // 如果有一些类库是放在一些奇怪的地方的，你可以添加自定义的路径或者目录
@@ -87,9 +90,9 @@ module.exports = {
     //每次构建清除dist文件夹
     new cleanWebpackPlugin("dist"),
     new htmlWebpackPlugin({
-      filename: 'index.html',
-			template: './src/views/index.html',
-			minify: {
+      filename: "index.html",
+      template: "./src/views/index.html",
+      minify: {
         removeComments: true,
         collapseWhitespace: true,
         removeRedundantAttributes: true,
@@ -102,6 +105,6 @@ module.exports = {
         minifyURLs: true
       }
     }),
-    new ExtractTextPlugin("styles.css")
+    new ExtractTextPlugin("style.css")
   ]
 };
