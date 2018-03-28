@@ -27,7 +27,7 @@ module.exports = {
     rules: [
       // less、css
       {
-        test: /^.(less|css)$/,
+        test: /.(less|css)$/,
         exclude: /node_modules/,
         include: path.resolve(__dirname, "src"),
         use: ExtractTextPlugin.extract({ 
@@ -45,7 +45,7 @@ module.exports = {
       },
       // js
       {
-        test: /^.js&$/,
+        test: /.js$/,
         exclude: /node_modules/,
         include: path.resolve(__dirname, "src"),
         use: "babal-loader"
@@ -53,7 +53,7 @@ module.exports = {
       //ts
       {
         enforce: "pre",
-        test: /^.ts$/,
+        test: /.ts$/,
         exclude: /node_modules/,
         include: path.resolve(__dirname, "src"),
         use: "ts-loader"
@@ -86,6 +86,22 @@ module.exports = {
   plugins: [
     //每次构建清除dist文件夹
     new cleanWebpackPlugin("dist"),
-    new htmlWebpackPlugin()
+    new htmlWebpackPlugin({
+      filename: 'index.html',
+			template: './src/views/index.html',
+			minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true
+      }
+    }),
+    new ExtractTextPlugin("styles.css")
   ]
 };

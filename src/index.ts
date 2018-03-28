@@ -1,3 +1,5 @@
+import './css/style.css';
+
 
 class Cat {
   say() {
