@@ -1,0 +1,6 @@
+# mac
+.DS_Store 
+*/.DS_Store 
+#js
+node_module
+node_modules
